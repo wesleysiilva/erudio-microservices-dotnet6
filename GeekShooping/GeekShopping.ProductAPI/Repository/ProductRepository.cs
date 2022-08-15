@@ -53,7 +53,7 @@ namespace GeekShopping.ProductAPI.Repository
         {
             try
             {
-                Product product = _mapper.Map<Product>(await this.FindById(id));
+                Product product = await _context.Products.Where(x => x.Id == id).FirstOrDefaultAsync();
                 if (product == null)
                     return false;
 
