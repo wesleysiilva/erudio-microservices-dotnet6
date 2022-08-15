@@ -1,11 +1,26 @@
-var builder = WebApplication.CreateBuilder(args);
+using GeekShopping.Web.Services;
+using GeekShopping.Web.Services.IServices;
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
+#region Add services to the container.
+builder.Services.AddHttpClient<IProductService, ProductService>(c => 
+    c.BaseAddress = new Uri(
+        configuration["ServiceUrls:ProductAPI"]
+    )
+);
 builder.Services.AddControllersWithViews();
+
+#region DI
+
+
+#endregion
+
+#endregion
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+#region Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -19,5 +34,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+#endregion
 
 app.Run();
