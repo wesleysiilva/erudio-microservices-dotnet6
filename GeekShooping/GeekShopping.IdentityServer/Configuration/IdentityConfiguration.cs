@@ -40,8 +40,8 @@ namespace GeekShopping.IdentityServer.Configuration
                     ClientId = "geek_shopping",
                     ClientSecrets = { new Secret("SECRETCOMPLEXA".Sha256()) },
                     AllowedGrantTypes = GrantTypes.Code,
-                    RedirectUris = {"http://localhost:62490/signin-oidc"},
-                    PostLogoutRedirectUris = {"http://localhost:62490/signout-oidc"},
+                    RedirectUris = {"https://localhost:4430/signin-oidc"},
+                    PostLogoutRedirectUris = {"https://localhost:4430/signout-oidc"},
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
