@@ -1,8 +1,7 @@
-﻿@model IEnumerable<ProductModel>
+﻿@model IEnumerable<GeekShopping.Web.Models.ProductModel>
 
-<br />
-<br />
-
+<br/>
+<br/>
 <div class="container p-4 border">
     <div class="row pb-2">
         <div class="col">
@@ -10,16 +9,22 @@
         </div>
         <div class="col text-end pt-1">
             <a asp-action="ProductCreate" class="btn btn-outline-primary">
-                <i class="fas fa-plus"></i>Create new Product
+                <i class="fas fa-plus"></i>Create New Product
             </a>
         </div>
     </div>
     <table class="table">
         <thead>
             <tr>
-                <td>Name</td>
-                <td>Category</td>
-                <td>Price</td>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Category
+                </th>
+                <th>
+                    Price
+                </th>
             </tr>
         </thead>
         <tbody>

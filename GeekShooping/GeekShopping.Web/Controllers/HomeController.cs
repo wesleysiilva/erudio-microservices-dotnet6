@@ -18,7 +18,9 @@ namespace GeekShopping.Web.Controllers
             _productService = productService;
         }
 
-        public async Task<IActionResult> Index() => View(await _productService.FindAllProducts(await HttpContext.GetTokenAsync("access_token")));
+        public async Task<IActionResult> Index() => View(await _productService.FindAllProducts(""));
+        [Authorize]
+        public async Task<IActionResult> Details(int id) => View(await _productService.FindProductById(id, await HttpContext.GetTokenAsync("access_token")));
 
         public IActionResult Privacy() => View();
 
@@ -26,10 +28,8 @@ namespace GeekShopping.Web.Controllers
         public IActionResult Error() => View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 
         [Authorize]
-        public async Task<IActionResult> Login() => RedirectToAction(nameof(Index));
-
+        public IActionResult Login() => RedirectToAction(nameof(Index));
 
         public IActionResult Logout() => SignOut("Cookies", "oidc");
-
     }
 }

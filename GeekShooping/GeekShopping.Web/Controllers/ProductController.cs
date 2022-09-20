@@ -18,19 +18,18 @@ namespace GeekShopping.Web.Controllers
 
         public async Task<IActionResult> ProductIndex() => View(await _productService.FindAllProducts(""));        
 
-        public async Task<IActionResult> ProductCreate() => View();
+        public IActionResult ProductCreate() => View();
 
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> ProductCreate(ProductModel model)
         {
-            if (ModelState.IsValid)
-            {
-                var response = await _productService.CreateProduct(model, await HttpContext.GetTokenAsync("access_token"));
-                if (response != null) return RedirectToAction(nameof(ProductIndex));
-            }
+            if (!ModelState.IsValid) return View(model);
+            
+            var response = await _productService.CreateProduct(model, await HttpContext.GetTokenAsync("access_token"));
+            if (response != null) return RedirectToAction(nameof(ProductIndex));
 
-            return View();
+            return View(model);
         }
 
         public async Task<IActionResult> ProductUpdate(int id)
@@ -44,12 +43,11 @@ namespace GeekShopping.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> ProductUpdate(ProductModel model)
         {
-            if (ModelState.IsValid)
-            {
-                var response = await _productService.UpdateProduct(model, await HttpContext.GetTokenAsync("access_token"));
-                if (response != null) return RedirectToAction(nameof(ProductIndex));
-            }
-
+            if (!ModelState.IsValid) return View(model);
+            
+            var response = await _productService.UpdateProduct(model, await HttpContext.GetTokenAsync("access_token"));
+            if (response != null) return RedirectToAction(nameof(ProductIndex));
+            
             return View(model);
         }
         [Authorize]
