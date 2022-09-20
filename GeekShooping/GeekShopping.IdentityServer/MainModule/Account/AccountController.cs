@@ -348,10 +348,7 @@ namespace GeekShopping.IdentityServer.MainModule.Account
         private async Task<RegisterViewModel> BuildRegisterViewModelAsync(string returnUrl)
         {
             var context = await _interaction.GetAuthorizationContextAsync(returnUrl);
-            List<string> roles = new List<string>();
-            roles.Add("Admin");
-            roles.Add("Client");
-            ViewBag.message = roles;
+            ViewBag.message = new List<string>() { "Admin", "Client" };
             if (context?.IdP != null && await _schemeProvider.GetSchemeAsync(context.IdP) != null)
             {
                 var local = context.IdP == IdentityServerConstants.LocalIdentityProvider;
