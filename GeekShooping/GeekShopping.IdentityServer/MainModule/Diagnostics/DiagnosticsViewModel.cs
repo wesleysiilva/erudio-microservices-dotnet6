@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 
-namespace IdentityServerHost.Quickstart.UI
+namespace GeekShopping.IdentityServer.MainModule.Diagnostics
 {
     public class DiagnosticsViewModel
     {
