@@ -304,6 +304,8 @@ namespace GeekShopping.IdentityServer.MainModule.Account
                     var loginresult = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, lockoutOnFailure: true);
                     if (loginresult.Succeeded)
                     {
+                        ViewBag.message = new List<string>() { "Admin", "Client" };
+
                         var checkuser = await _userManager.FindByNameAsync(model.Username);
                         await _events.RaiseAsync(new UserLoginSuccessEvent(checkuser.UserName, checkuser.Id, checkuser.UserName, clientId: context?.Client.ClientId));
 
