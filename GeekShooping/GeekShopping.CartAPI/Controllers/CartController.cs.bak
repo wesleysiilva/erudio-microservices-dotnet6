@@ -8,9 +8,9 @@ namespace GeekShopping.CartAPI.Controllers
     [Route("api/v1/[controller]")]
     public class CartController : ControllerBase
     {
-        private readonly ICartRepository _repository;
+        private readonly CartRepository _repository;
 
-        public CartController(ICartRepository repository)
+        public CartController(CartRepository repository)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
