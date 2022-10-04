@@ -6,5 +6,6 @@
         public string UserId { get; set; }
         public string CuponCode { get; set; }
         public decimal PurchaseAmount { get; set; }
+        public decimal DiscountAmount { get; set; }
     }
 }

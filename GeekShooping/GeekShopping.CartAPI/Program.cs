@@ -81,6 +81,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 #endregion
 
+builder.Services.AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
 #endregion
 
 var app = builder.Build();
