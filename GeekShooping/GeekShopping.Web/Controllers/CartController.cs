@@ -3,11 +3,6 @@ using GeekShopping.Web.Services.IServices;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GeekShopping.Web.Controllers
 {
@@ -15,18 +10,18 @@ namespace GeekShopping.Web.Controllers
     {
         private readonly IProductService _productService;
         private readonly ICartService _cartService;
-        //private readonly ICouponService _couponService;
+        private readonly ICouponService _couponService;
 
         public CartController
         (
             IProductService productService,
-            ICartService cartService
-        //ICouponService couponService
+            ICartService cartService,
+            ICouponService couponService
         )
         {
             _productService = productService;
             _cartService = cartService;
-            //_couponService = couponService;
+            _couponService = couponService;
         }
 
         [Authorize]
@@ -78,14 +73,14 @@ namespace GeekShopping.Web.Controllers
 
             if (response?.CartHeader != null)
             {
-//                if (!string.IsNullOrEmpty(response.CartHeader.CuponCode))
-//                {
-//                    var coupon = await _couponService.GetCoupon(response.CartHeader.CuponCode, token);
-//                    if (coupon?.CouponCode != null)
-//                    {
-//                        response.CartHeader.DiscountAmount = coupon.DiscountAmount;
-//                    }
-//                }
+                if (!string.IsNullOrEmpty(response.CartHeader.CuponCode))
+                {
+                    var coupon = await _couponService.GetCoupon(response.CartHeader.CuponCode, token);
+                    if (coupon?.CouponCode != null)
+                    {
+                        response.CartHeader.DiscountAmount = coupon.DiscountAmount;
+                    }
+                }
                 foreach (var detail in response.CartDetails)
                 {
                     response.CartHeader.PurchaseAmount += (detail.Product.Price * detail.Count);

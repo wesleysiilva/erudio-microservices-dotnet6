@@ -6,11 +6,11 @@ namespace GeekShopping.CouponAPI.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class CartController : ControllerBase
+    public class CouponController : ControllerBase
     {
         private readonly ICouponRepository _repository;
 
-        public CartController(ICouponRepository repository)
+        public CouponController(ICouponRepository repository)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
