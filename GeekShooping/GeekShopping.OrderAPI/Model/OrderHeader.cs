@@ -9,7 +9,7 @@ namespace GeekShopping.OrderAPI.Model
         [Column("user_id")]
         public string UserId { get; set; }
         [Column("cupon_code")]
-        public string CuponCode { get; set; }
+        public string CouponCode { get; set; }
         [Column("purchase_amount")]
         public decimal PurchaseAmount { get; set; }
         [Column("discount_amount")]
@@ -34,7 +34,7 @@ namespace GeekShopping.OrderAPI.Model
         public string ExpiryMonthYear { get; set; }
         [Column("total_itens")]
         public int CartTotalItens { get; set; }
-        public IEnumerable<OrderDetail> OrderDetails { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
         [Column("payment_status")]
         public bool PaymentStatus { get; set; }
     }
