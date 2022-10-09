@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekShopping.CouponAPI", "G
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{A010CF55-E81A-4001-9974-3A5E68573574}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekShopping.MessageBus", "GeekShopping.MessageBus\GeekShopping.MessageBus.csproj", "{DA3CFBE2-F0AC-401A-B2FF-25C770655270}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekShopping.MessageBus", "GeekShopping.MessageBus\GeekShopping.MessageBus.csproj", "{DA3CFBE2-F0AC-401A-B2FF-25C770655270}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekShopping.OrderAPI", "GeekShopping.OrderAPI\GeekShopping.OrderAPI.csproj", "{1B93D718-3600-490E-B136-7DBBF18698E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{DA3CFBE2-F0AC-401A-B2FF-25C770655270}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA3CFBE2-F0AC-401A-B2FF-25C770655270}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA3CFBE2-F0AC-401A-B2FF-25C770655270}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B93D718-3600-490E-B136-7DBBF18698E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B93D718-3600-490E-B136-7DBBF18698E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B93D718-3600-490E-B136-7DBBF18698E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B93D718-3600-490E-B136-7DBBF18698E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{7200A809-8C70-4173-BC1E-E39C6887905B} = {E22DD0F5-4C41-4652-BA9D-45B45A7694D8}
 		{37E235F9-0CBB-4EBC-B34A-1D9449067C4B} = {E22DD0F5-4C41-4652-BA9D-45B45A7694D8}
 		{DA3CFBE2-F0AC-401A-B2FF-25C770655270} = {A010CF55-E81A-4001-9974-3A5E68573574}
+		{1B93D718-3600-490E-B136-7DBBF18698E5} = {E22DD0F5-4C41-4652-BA9D-45B45A7694D8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {14DDDA1F-B2D6-4EF3-A293-ECC6A316B979}
