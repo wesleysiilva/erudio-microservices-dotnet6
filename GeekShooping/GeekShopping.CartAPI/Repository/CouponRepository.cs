@@ -10,7 +10,12 @@ namespace GeekShopping.CartAPI.Repository
         private readonly HttpClient _client;
         public const string BasePath = "api/v1/coupon";
 
-        public async Task<CouponVO> GetCouponByCouponCode(string couponCode, string token)
+        public CouponRepository(HttpClient client)
+        {
+            _client = client;
+        }
+
+        public async Task<CouponVO> GetCoupon(string couponCode, string token)
         {
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _client.GetAsync($"{BasePath}/{couponCode}");
