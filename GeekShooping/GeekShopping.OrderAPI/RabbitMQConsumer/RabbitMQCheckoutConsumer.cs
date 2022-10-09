@@ -8,13 +8,13 @@ using System.Text.Json;
 
 namespace GeekShopping.OrderAPI.RabbitMQConsumer
 {
-    public class RabbitMQConsumer : BackgroundService
+    public class RabbitMQCheckoutConsumer : BackgroundService
     {
         private readonly OrderRepository _repository;
         private IConnection _connection;
         private IModel _channel;
 
-        public RabbitMQConsumer(OrderRepository repository)
+        public RabbitMQCheckoutConsumer(OrderRepository repository)
         {
             _repository = repository;
             var factory = new ConnectionFactory
