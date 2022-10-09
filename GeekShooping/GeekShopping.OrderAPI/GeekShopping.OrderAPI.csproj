@@ -24,4 +24,8 @@
 	  <Folder Include="Migrations\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\GeekShopping.MessageBus\GeekShopping.MessageBus.csproj" />
+	</ItemGroup>
+
 </Project>
