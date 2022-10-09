@@ -22,25 +22,20 @@ namespace GeekShopping.CartAPI.RabbitMQSender
 
         public void SendMessage(BaseMessage message, string queueName)
         {
-            var factory = new ConnectionFactory
+            if (ConnectionExists())
             {
-                HostName = _hostName,
-                UserName = _userName,
-                Password = _password,
-            };
-            _connection = factory.CreateConnection();
-
-            using var channel = _connection.CreateModel();
-            channel.QueueDeclare(queue: queueName, false, false, false, arguments: null);
-            byte[] body = GetMessageAsByteArray(message);
-            channel.BasicPublish(exchange: "", routingKey: queueName, basicProperties: null, body: body);
+                using var channel = _connection.CreateModel();
+                channel.QueueDeclare(queue: queueName, false, false, false, arguments: null);
+                byte[] body = GetMessageAsByteArray(message);
+                channel.BasicPublish(exchange: "", routingKey: queueName, basicProperties: null, body: body);
+            }
         }
 
         private static byte[] GetMessageAsByteArray(BaseMessage message)
         {
             var json = JsonSerializer
                 .Serialize<CheckoutHeaderVO>(
-                    (CheckoutHeaderVO)message, 
+                    (CheckoutHeaderVO)message,
                     new JsonSerializerOptions
                     {
                         WriteIndented = true
@@ -48,6 +43,32 @@ namespace GeekShopping.CartAPI.RabbitMQSender
                 );
             var body = Encoding.UTF8.GetBytes(json);
             return body;
+        }
+
+        private bool ConnectionExists()
+        {
+            if (_connection != null) return true;
+            CreateConnection();
+            return true;
+        }
+
+        private void CreateConnection()
+        {
+            try
+            {
+                var factory = new ConnectionFactory
+                {
+                    HostName = _hostName,
+                    UserName = _userName,
+                    Password = _password,
+                };
+                _connection = factory.CreateConnection();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
