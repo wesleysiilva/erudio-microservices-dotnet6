@@ -1,8 +1,6 @@
-using GeekShopping.OrderAPI.Model.Context;
-using GeekShopping.OrderAPI.RabbitMQConsumer;
-using GeekShopping.OrderAPI.RabbitMQSender;
-using GeekShopping.OrderAPI.Repository;
-using Microsoft.EntityFrameworkCore;
+using GeekShopping.PaymentAPI.RabbitMQConsumer;
+using GeekShopping.PaymentAPI.RabbitMQSender;
+using GeekShopping.PaymentProcessor;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -11,14 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 #region Add services to the container.
 #region DbContexts
 var connection = builder.Configuration["MySQLConnection:MySQLConnectionString"];
-builder.Services.AddDbContext<MySQLContext>(options => options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 29))));
+//builder.Services.AddDbContext<MySQLContext>(options => options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 29))));
 #endregion
 
 #region DI
-var dbBuilder = new DbContextOptionsBuilder<MySQLContext>();
-dbBuilder.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 29)));
-builder.Services.AddSingleton(new OrderRepository(dbBuilder.Options));
-builder.Services.AddHostedService<RabbitMQCheckoutConsumer>();
+//var dbBuilder = new DbContextOptionsBuilder<MySQLContext>();
+//dbBuilder.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 29)));
+builder.Services.AddSingleton<IProcessPayment, ProcessPayment>();
 builder.Services.AddHostedService<RabbitMQPaymentConsumer>();
 builder.Services.AddSingleton<IRabbitMQSender, RabbitMQSender>();
 #endregion
@@ -51,8 +48,7 @@ builder.Services.AddEndpointsApiExplorer();
 #region Swagger
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Geek Shoping.OrderAPI", Version = "v1" });
-    c.EnableAnnotations();
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Geek Shoping.PaymentAPI", Version = "v1" });
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = @"Enter 'Bearer' [space] and your token!",
@@ -89,7 +85,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GeekShopping.OrderAPI v1"));
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GeekShopping.PaymentAPI v1"));
 }
 app.UseHttpsRedirection();
 app.UseAuthentication();
