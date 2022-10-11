@@ -44,7 +44,7 @@ namespace GeekShopping.CartAPI.Repository
         public async Task<bool> ClearCart(string userId)
         {
             var cartHeader = await _context.CartHeaders.FirstOrDefaultAsync(x => x.UserId == userId);
-            if (cartHeader != null)
+            if (cartHeader == null)
                 return false;
 
             _context.CartDetails.RemoveRange(
